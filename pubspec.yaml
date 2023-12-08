@@ -31,7 +31,6 @@ dependencies:
     sdk: flutter
   analyzer: ^4.1.0
   flutter_overboard: ^3.1.1
-  flutter_windowmanager: ^0.2.0
   bloc: ^8.1.0
   screen_capture_event:
   cupertino_icons: ^1.0.2

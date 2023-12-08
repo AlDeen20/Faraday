@@ -1,12 +1,12 @@
 import 'package:badges/badges.dart' as badages;
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
- import 'package:hesham/core/enum/enums.dart';
+//import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+import 'package:hesham/core/enum/enums.dart';
 import 'package:hesham/core/extension/extension.dart';
 import 'package:hesham/core/resources/color_manager.dart';
 import 'package:hesham/core/resources/font_manager.dart';
 import 'package:hesham/core/resources/strings_manager.dart';
 import 'package:hesham/core/resources/values_manager.dart';
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hesham/features/presentation/screen/home/drawer.dart';
@@ -39,15 +39,14 @@ class MainScaffold extends StatefulWidget {
 
 class _MainScaffoldState extends State<MainScaffold> {
   @override
-  void initState(){
+  void initState() {
     disableScreen();
 
     super.initState();
-
-
   }
-  disableScreen()async{
-    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+
+  disableScreen() async {
+    //await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   }
   @override
   Widget build(BuildContext context) {
@@ -60,24 +59,22 @@ class _MainScaffoldState extends State<MainScaffold> {
         child: WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
-
               resizeToAvoidBottomInset: false,
               body: Container(
-                decoration:
-                  const BoxDecoration(image: DecorationImage(image: AssetImage(ImagesAssetsManage.backImages,),fit: BoxFit.fill),),
-
-
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        ImagesAssetsManage.backImages,
+                      ),
+                      fit: BoxFit.fill),
+                ),
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height,
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
-
                     const Positioned(
-                        left: 0,
-                        top: 50,
-                        child:IconButtonLangauge()
-                    ),
+                        left: 0, top: 50, child: IconButtonLangauge()),
                     SafeArea(child: widget.widget),
                   ],
                 ),
@@ -85,7 +82,6 @@ class _MainScaffoldState extends State<MainScaffold> {
             )));
   }
 }
-
 
 class HomeScaffold extends StatefulWidget {
   final Widget widget;
@@ -99,88 +95,115 @@ class HomeScaffold extends StatefulWidget {
   State<HomeScaffold> createState() => _HomeScaffoldState();
 }
 
-class _HomeScaffoldState extends State<HomeScaffold>   {
-
-  final GlobalKey<ScaffoldState> _scaffoldKey =  GlobalKey<ScaffoldState>();
+class _HomeScaffoldState extends State<HomeScaffold> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState(){
+  void initState() {
     disableScreen();
 
-
     super.initState();
-
-
   }
- disableScreen()async{
-   await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
- }
+
+  disableScreen() async {
+    //await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+  }
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
-    final num constrainedTextScaleFactor = mediaQueryData.textScaleFactor.clamp(0.5, 1.0);
-    return MediaQuery(data: mediaQueryData.copyWith(textScaleFactor: constrainedTextScaleFactor as double?),
+    final num constrainedTextScaleFactor =
+        mediaQueryData.textScaleFactor.clamp(0.5, 1.0);
+    return MediaQuery(
+        data: mediaQueryData.copyWith(
+            textScaleFactor: constrainedTextScaleFactor as double?),
         child: WillPopScope(
-          onWillPop: ()async=>true,
-          child: Scaffold(
-            key: _scaffoldKey,
-            drawer:const DrawerData(),
-            body: Container(
-             height: context.height,
-             width: context.width,
-             decoration:const BoxDecoration(image: DecorationImage(image: AssetImage(ImagesAssetsManage.backImages,),fit: BoxFit.fill),),
-
-             child:  SingleChildScrollView(
-               child:OrientationBuilder(builder: (context,or)=>or==Orientation.portrait? Column(children: [
-                 SizedBox(
-                     height: context.height*AppSize.appSize0_15,
-                     child: Header(globalKey:_scaffoldKey ,))
-                 ,
-                 SizedBox(
-                     height: context.height*AppSize.appSize0_85,
-                     child: widget.widget)
-
-               ],): Column(children: [
-                 SizedBox(
-                     height: context.width*AppSize.appSize0_15,
-                     child: Header(globalKey:_scaffoldKey ,))
-                 ,
-                 SizedBox(
-                     height: context.width*AppSize.appSize0_85,
-                     child: widget.widget)
-
-               ],),),
-             )),
-          )
-
-        ));
+            onWillPop: () async => true,
+            child: Scaffold(
+              key: _scaffoldKey,
+              drawer: const DrawerData(),
+              body: Container(
+                  height: context.height,
+                  width: context.width,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          ImagesAssetsManage.backImages,
+                        ),
+                        fit: BoxFit.fill),
+                  ),
+                  child: SingleChildScrollView(
+                    child: OrientationBuilder(
+                      builder: (context, or) => or == Orientation.portrait
+                          ? Column(
+                              children: [
+                                SizedBox(
+                                    height:
+                                        context.height * AppSize.appSize0_15,
+                                    child: Header(
+                                      globalKey: _scaffoldKey,
+                                    )),
+                                SizedBox(
+                                    height:
+                                        context.height * AppSize.appSize0_85,
+                                    child: widget.widget)
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                SizedBox(
+                                    height: context.width * AppSize.appSize0_15,
+                                    child: Header(
+                                      globalKey: _scaffoldKey,
+                                    )),
+                                SizedBox(
+                                    height: context.width * AppSize.appSize0_85,
+                                    child: widget.widget)
+                              ],
+                            ),
+                    ),
+                  )),
+            )));
   }
 }
+
 class Header extends StatelessWidget {
   final GlobalKey<ScaffoldState> globalKey;
-  const Header({Key? key,required this.globalKey}) : super(key: key);
+  const Header({Key? key, required this.globalKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return   OrientationBuilder(
-      builder:(context,or)=> Container(
-        padding:or==Orientation.portrait? const EdgeInsets.all(15): const EdgeInsets.only(top:30,bottom:0,left: 15,right: 15),
-        height:or==Orientation.portrait? context.height*AppSize.appSize0_15: context.width*AppSize.appSize0_15,
+    return OrientationBuilder(
+      builder: (context, or) => Container(
+        padding: or == Orientation.portrait
+            ? const EdgeInsets.all(15)
+            : const EdgeInsets.only(top: 30, bottom: 0, left: 15, right: 15),
+        height: or == Orientation.portrait
+            ? context.height * AppSize.appSize0_15
+            : context.width * AppSize.appSize0_15,
         width: context.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(ImagesAssetsManage.logoImages,width:AppSize.appSize150,),
+            Image.asset(
+              ImagesAssetsManage.logoImages,
+              width: AppSize.appSize150,
+            ),
             const NotificationIcon(),
-            GestureDetector(child:const Icon(Icons.menu,color: Colors.white,),onTap: (){
-              globalKey.currentState!.openDrawer();
-            },)
-          ],),
+            GestureDetector(
+              child: const Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+              onTap: () {
+                globalKey.currentState!.openDrawer();
+              },
+            )
+          ],
+        ),
       ),
     );
   }
 }
-
 
 class HomeScaffoldInternal extends StatefulWidget {
   final Widget widget;
@@ -194,28 +217,28 @@ class HomeScaffoldInternal extends StatefulWidget {
   State<HomeScaffoldInternal> createState() => _HomeScaffoldInternal();
 }
 
-class _HomeScaffoldInternal extends State<HomeScaffoldInternal>  with SingleTickerProviderStateMixin {
- late Animation<double> _animation;
- late AnimationController _animationController;
+class _HomeScaffoldInternal extends State<HomeScaffoldInternal>
+    with SingleTickerProviderStateMixin {
+  late Animation<double> _animation;
+  late AnimationController _animationController;
   @override
-  void initState(){
+  void initState() {
     disableScreen();
     _animationController = AnimationController(
       vsync: this,
-      duration:const Duration(milliseconds: 260),
+      duration: const Duration(milliseconds: 260),
     );
 
-    final curvedAnimation = CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
+    final curvedAnimation =
+        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
-
     super.initState();
-
-
   }
- disableScreen()async{
-   await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
- }
+
+  disableScreen() async {
+    //await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+  }
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
@@ -225,181 +248,190 @@ class _HomeScaffoldInternal extends State<HomeScaffoldInternal>  with SingleTick
         data: mediaQueryData.copyWith(
             textScaleFactor: constrainedTextScaleFactor as double?),
         child: Scaffold(
-
-
           appBar: AppBar(
             elevation: 0,
-
-             title: SizedBox(child: Image.asset(ImagesAssetsManage.logoImages,width: context.width/2,),),
+            title: SizedBox(
+              child: Image.asset(
+                ImagesAssetsManage.logoImages,
+                width: context.width / 2,
+              ),
+            ),
             centerTitle: true,
             automaticallyImplyLeading: true,
-            backgroundColor: ColorManager.primaryColor,),
-
-
-          body: Container(child: widget.widget,
-        ),
-
+            backgroundColor: ColorManager.primaryColor,
+          ),
+          body: Container(
+            child: widget.widget,
+          ),
         ));
   }
- PopupMenuItem _buildPopupMenuItemLang() {
-   final res= context.read<LangaugeCubit>().state.locale.languageCode;
-   return PopupMenuItem(
-     onTap: ()async{
-       if(res=="en")
-       {
-         await context.read<LangaugeCubit>().changeAppLangauge(LangaugeCode.ar);
-       }
-       else
-         {
-           await context.read<LangaugeCubit>().changeAppLangauge(LangaugeCode.en);
-         }
-     },
-     child: Row(
-       mainAxisAlignment: MainAxisAlignment.spaceAround,
-       children: [
-         Icon(
 
-           Icons.language,
-           color: ColorManager.primaryColor,
-           size: 20,
-         ),
-         Text(res=="en"?"العربية":"English",style:const TextStyle(fontSize: 12),),
+  PopupMenuItem _buildPopupMenuItemLang() {
+    final res = context.read<LangaugeCubit>().state.locale.languageCode;
+    return PopupMenuItem(
+      onTap: () async {
+        if (res == "en") {
+          await context
+              .read<LangaugeCubit>()
+              .changeAppLangauge(LangaugeCode.ar);
+        } else {
+          await context
+              .read<LangaugeCubit>()
+              .changeAppLangauge(LangaugeCode.en);
+        }
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(
+            Icons.language,
+            color: ColorManager.primaryColor,
+            size: 20,
+          ),
+          Text(
+            res == "en" ? "العربية" : "English",
+            style: const TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
 
-       ],
-     ),
-   );
- }
- PopupMenuItem _buildPopupMenuItemLogout() {
-   return PopupMenuItem(
-     onTap: ()async{
-       context.read<HomeBloc>().add(const LogoutEvent());
-     },
-     child: Row(
-       mainAxisAlignment: MainAxisAlignment.spaceAround,
-       children: [
-         Icon(
-           Icons.logout,
-           color: ColorManager.primaryColor,
-           size: 20,
+  PopupMenuItem _buildPopupMenuItemLogout() {
+    return PopupMenuItem(
+      onTap: () async {
+        context.read<HomeBloc>().add(const LogoutEvent());
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(
+            Icons.logout,
+            color: ColorManager.primaryColor,
+            size: 20,
+          ),
+          Text(
+            AppLocalizationsImpl.of(context)!.translate(AppStrings.logout),
+            style: const TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
 
-         ),
-         Text(AppLocalizationsImpl.of(context)!.translate(AppStrings.logout),style: const TextStyle(fontSize: 12),),
+  PopupMenuItem _buildPopupMenuItemDeleteAccount() {
+    return PopupMenuItem(
+      onTap: () async {
+        context.read<HomeBloc>().add(const LogoutEvent());
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(
+            Icons.remove_circle,
+            color: ColorManager.primaryColor,
+            size: 20,
+          ),
+          Text(
+            AppLocalizationsImpl.of(context)!
+                .translate(AppStrings.deleteAccount),
+            style: const TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
 
-       ],
-     ),
-   );
- }
- PopupMenuItem _buildPopupMenuItemDeleteAccount() {
-   return PopupMenuItem(
-     onTap: ()async{
-       context.read<HomeBloc>().add(const LogoutEvent());
-     },
-     child: Row(
-       mainAxisAlignment: MainAxisAlignment.spaceAround,
-       children: [
-         Icon(
-           Icons.remove_circle,
-           color: ColorManager.primaryColor,
-           size: 20,
-
-         ),
-         Text(AppLocalizationsImpl.of(context)!.translate(AppStrings.deleteAccount),style: const TextStyle(fontSize: 12),),
-
-       ],
-     ),
-   );
- }
- PopupMenuItem _buildPopupMenuItemSupport() {
-   return PopupMenuItem(
-     onTap: ()async{
-      Navigator.of(context).pushNamed(Routes.contact);
-     },
-     child: GestureDetector(
-       onTap: ()=>Navigator.of(context).pushNamed(Routes.contact),
-       child: Row(
-         mainAxisAlignment: MainAxisAlignment.spaceAround,
-         children: [
-           Icon(
-             Icons.chat,
-             color: ColorManager.primaryColor,
-             size: 20,
-
-           ),
-           Text(AppLocalizationsImpl.of(context)!.translate(AppStrings.contactUs),style: const TextStyle(fontSize: 12)),
-
-         ],
-       ),
-     ),
-   );
- }
-}
-
-class CustomAppBar extends PreferredSize{
-  const CustomAppBar({required Widget child, required Size preferredSize}) :
-        super(child: child, preferredSize: preferredSize);
-
-}
-appBar(BuildContext context){
-
-  return CustomAppBar(child:
-  Container(
-
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center
-      ,children: [
-
-      BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-         User user= context.select((AuthenticationBloc auth) => auth.user);
-          return SizedBox(
-            width: AppSize.appSize100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                 CircleAvatar(
-                    child:const Icon(Icons.person),
-                    radius: AppSize.appSize20,
-                    foregroundColor: ColorManager.primaryColor,
-                    backgroundColor:ColorManager.whiteColor ,
-                  ),
-
-
-                Text(AppLocalizationsImpl.of(context)!.translate(user.name), style:Theme.of(context).textTheme.bodyText2!.copyWith(color: ColorManager.whiteColor,overflow: TextOverflow.ellipsis)),
-
-
-
-              ],
+  PopupMenuItem _buildPopupMenuItemSupport() {
+    return PopupMenuItem(
+      onTap: () async {
+        Navigator.of(context).pushNamed(Routes.contact);
+      },
+      child: GestureDetector(
+        onTap: () => Navigator.of(context).pushNamed(Routes.contact),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Icon(
+              Icons.chat,
+              color: ColorManager.primaryColor,
+              size: 20,
             ),
-          );
-        },
+            Text(
+                AppLocalizationsImpl.of(context)!
+                    .translate(AppStrings.contactUs),
+                style: const TextStyle(fontSize: 12)),
+          ],
+        ),
       ),
+    );
+  }
+}
 
+class CustomAppBar extends PreferredSize {
+  const CustomAppBar({required Widget child, required Size preferredSize})
+      : super(child: child, preferredSize: preferredSize);
+}
 
-
-      Container(
-        padding: const EdgeInsets.only(bottom:  AppPadding.appPadding12,top: AppPadding.appPadding12  ),
-        height: AppSize.appSize50,
-        child:Row(children: [IconButtonLangauge()],),
+appBar(BuildContext context) {
+  return CustomAppBar(
+    child: Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              User user =
+                  context.select((AuthenticationBloc auth) => auth.user);
+              return SizedBox(
+                width: AppSize.appSize100,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CircleAvatar(
+                      child: const Icon(Icons.person),
+                      radius: AppSize.appSize20,
+                      foregroundColor: ColorManager.primaryColor,
+                      backgroundColor: ColorManager.whiteColor,
+                    ),
+                    Text(AppLocalizationsImpl.of(context)!.translate(user.name),
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            color: ColorManager.whiteColor,
+                            overflow: TextOverflow.ellipsis)),
+                  ],
+                ),
+              );
+            },
+          ),
+          Container(
+            padding: const EdgeInsets.only(
+                bottom: AppPadding.appPadding12, top: AppPadding.appPadding12),
+            height: AppSize.appSize50,
+            child: Row(
+              children: [IconButtonLangauge()],
+            ),
+          ),
+        ],
       ),
-    ],),
-    decoration: BoxDecoration(
-  gradient: LinearGradient(
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  tileMode: TileMode.clamp,
-  colors: [
-  ColorManager.primaryColorLight,
-  ColorManager.primaryColor,
-
-  ]),
-
-        borderRadius:const BorderRadius.only(bottomLeft: Radius.circular(AppSize.appSize20),bottomRight: Radius.circular(AppSize.appSize20))
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              tileMode: TileMode.clamp,
+              colors: [
+                ColorManager.primaryColorLight,
+                ColorManager.primaryColor,
+              ]),
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(AppSize.appSize20),
+              bottomRight: Radius.circular(AppSize.appSize20))),
+      padding: const EdgeInsets.all(AppPadding.appPadding10),
+      height: context.height * AppSize.appSize0_15,
+      width: context.width,
     ),
-    padding:const EdgeInsets.all(AppPadding.appPadding10),
-    height: context.height*AppSize.appSize0_15,
-    width: context.width,
-  ), preferredSize: const Size.fromHeight(AppSize.appSize90),);
+    preferredSize: const Size.fromHeight(AppSize.appSize90),
+  );
 }
 
 class NotificationIcon extends StatelessWidget {
@@ -407,24 +439,33 @@ class NotificationIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppPadding.appPadding10,horizontal: AppPadding.appPadding10),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          vertical: AppPadding.appPadding10,
+          horizontal: AppPadding.appPadding10),
       child: SizedBox(
         height: AppSize.appSize40,
         width: AppSize.appSize40,
         child: BlocBuilder<NotificationCubit, NotificationState>(
-          buildWhen: (previous, current) => previous.countNotification!=current.countNotification,
+          buildWhen: (previous, current) =>
+              previous.countNotification != current.countNotification,
           builder: (context, state) {
             return badages.Badge(
-              showBadge: state.countNotification!=0,
-              position: badages.BadgePosition.topStart(start: AppSize.appSize10),
-              badgeContent:
-              Text(state.countNotification.toString(),style: Theme.of(context).textTheme.bodyText2!.copyWith(color: ColorManager.whiteColor),),
+              showBadge: state.countNotification != 0,
+              position:
+                  badages.BadgePosition.topStart(start: AppSize.appSize10),
+              badgeContent: Text(
+                state.countNotification.toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2!
+                    .copyWith(color: ColorManager.whiteColor),
+              ),
               alignment: Alignment.topRight,
               toAnimate: true,
               badgeColor: Colors.red,
               animationType: badages.BadgeAnimationType.slide,
-              animationDuration:const Duration(seconds: AppValue.appValue1),
+              animationDuration: const Duration(seconds: AppValue.appValue1),
               child: GestureDetector(
                 onTap: () {
                   SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -433,10 +474,11 @@ class NotificationIcon extends StatelessWidget {
                   });
                 },
                 child: Icon(
-                   Icons.notification_important, color: ColorManager.whiteColor,size: AppSize.appSize30,),
+                  Icons.notification_important,
+                  color: ColorManager.whiteColor,
+                  size: AppSize.appSize30,
+                ),
               ),
-
-
             );
           },
         ),
