@@ -166,6 +166,88 @@ class _HomeScaffoldState extends State<HomeScaffold> {
   }
 }
 
+class HomeDeomScaffold extends StatefulWidget {
+  final Widget widget;
+
+  const HomeDeomScaffold({
+    Key? key,
+    required this.widget,
+  }) : super(key: key);
+
+  @override
+  State<HomeDeomScaffold> createState() => _HomeDeomScaffoldState();
+}
+
+class _HomeDeomScaffoldState extends State<HomeDeomScaffold> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    disableScreen();
+
+    super.initState();
+  }
+
+  disableScreen() async {
+    //await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+  }
+  @override
+  Widget build(BuildContext context) {
+    final mediaQueryData = MediaQuery.of(context);
+    final num constrainedTextScaleFactor =
+        mediaQueryData.textScaleFactor.clamp(0.5, 1.0);
+    return MediaQuery(
+        data: mediaQueryData.copyWith(
+            textScaleFactor: constrainedTextScaleFactor as double?),
+        child: WillPopScope(
+            onWillPop: () async => true,
+            child: Scaffold(
+              key: _scaffoldKey,
+              body: Container(
+                  height: context.height,
+                  width: context.width,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          ImagesAssetsManage.backImages,
+                        ),
+                        fit: BoxFit.fill),
+                  ),
+                  child: SingleChildScrollView(
+                    child: OrientationBuilder(
+                      builder: (context, or) => or == Orientation.portrait
+                          ? Column(
+                              children: [
+                                SizedBox(
+                                    height:
+                                        context.height * AppSize.appSize0_15,
+                                    child: HeaderDeom(
+                                      globalKey: _scaffoldKey,
+                                    )),
+                                SizedBox(
+                                    height:
+                                        context.height * AppSize.appSize0_85,
+                                    child: widget.widget)
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                SizedBox(
+                                    height: context.width * AppSize.appSize0_15,
+                                    child: HeaderDeom(
+                                      globalKey: _scaffoldKey,
+                                    )),
+                                SizedBox(
+                                    height: context.width * AppSize.appSize0_85,
+                                    child: widget.widget)
+                              ],
+                            ),
+                    ),
+                  )),
+            )));
+  }
+}
+
 class Header extends StatelessWidget {
   final GlobalKey<ScaffoldState> globalKey;
   const Header({Key? key, required this.globalKey}) : super(key: key);
@@ -196,6 +278,48 @@ class Header extends StatelessWidget {
               ),
               onTap: () {
                 globalKey.currentState!.openDrawer();
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HeaderDeom extends StatelessWidget {
+  final GlobalKey<ScaffoldState> globalKey;
+  const HeaderDeom({Key? key, required this.globalKey}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OrientationBuilder(
+      builder: (context, or) => Container(
+        padding: or == Orientation.portrait
+            ? const EdgeInsets.all(15)
+            : const EdgeInsets.only(top: 30, bottom: 0, left: 15, right: 15),
+        height: or == Orientation.portrait
+            ? context.height * AppSize.appSize0_15
+            : context.width * AppSize.appSize0_15,
+        width: context.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              ImagesAssetsManage.logoImages,
+              width: AppSize.appSize150,
+            ),
+            const SizedBox(),
+            GestureDetector(
+              child: const Text(
+                'تسجيل الدخول',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, Routes.loginRoot);
               },
             )
           ],

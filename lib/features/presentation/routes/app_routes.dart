@@ -1,10 +1,10 @@
 //class of all routes
 abstract class Routes {
-
   //root routes splash screen
   static const String splashRoot = '/splashRoot';
   //auth routes
   static const String homeRoot = '/homeRoot';
+  static const String homeDeomRoot = '/homeDeomRoot';
   static const String loginRoot = '/login';
   static const String classSchool = '/classSchool';
   static const String classScreenShow = '/classScreenShow';
@@ -18,7 +18,6 @@ abstract class Routes {
   static const String maintainAppRoot = '/maintainApp';
   static const String updateAppRoot = '/updateApp';
 
-
   static const String changePasswordRoot = '/changepassword';
   static const String changePhoneRoot = '/changePhone';
   static const String changeNameRoot = '/changeName';
@@ -27,9 +26,6 @@ abstract class Routes {
   static const String onBoardingRoot = '/onBoarding';
   // home screen
 
-
   //undefine Route
   static const String unDefineRoute = '/unDefineRoute';
-
 }
-

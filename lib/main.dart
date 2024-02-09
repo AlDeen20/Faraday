@@ -35,9 +35,23 @@ void main() async {
     DeviceOrientation.landscapeLeft
   ]);
   await initAppServicesGetIt();
+
+  // Firebase.initializeApp(
+  //     name: 'hashemi',
+  //     options: const FirebaseOptions(
+  //       iosBundleId: 'com.hesham.hesham',
+  //       apiKey: "AIzaSyDR_aAzM3O0gxxhWGIbhGeq-AU06zxIUVA",
+  //       authDomain: "hashemi-ef8a2.firebaseapp.com",
+  //       projectId: "hashemi-ef8a2",
+  //       storageBucket: "hashemi-ef8a2.appspot.com",
+  //       messagingSenderId: "786256040605",
+  //       appId: "1:786256040605:web:687daab75ba7089b86ba74",
+  //     ));
   Firebase.initializeApp();
+
   FirebaseMessaging.onMessage.listen((RemoteMessage message) =>
       instance<NotificationCubit>().showNotification(message));
+
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) =>
       instance<NotificationCubit>().showNotification(message));
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -128,7 +142,7 @@ class _AppMaterialsState extends State<AppMaterials>
                       break;
                     case AuthenticationStatus.firstTimeAppOpened:
                       Future.delayed(const Duration(seconds: 5), () {
-                        _navigator.pushReplacementNamed(Routes.onBoardingRoot);
+                        _navigator.pushReplacementNamed(Routes.homeDeomRoot);
                       });
 
                       break;
