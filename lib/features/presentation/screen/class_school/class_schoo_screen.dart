@@ -200,14 +200,15 @@ showBottomSheet(
     builder: (BuildContext context) {
       return SizedBox(
         height: AppSize.appSize100,
+        width: context.width,
         child: SingleChildScrollView(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              MaterialClass(
-                lesson: lesson,
-              ),
-              HomeWorkAnswer(homeBloc: homeBloc, lesson: lesson),
+              // MaterialClass(
+              //   lesson: lesson,
+              // ),
+              // HomeWorkAnswer(homeBloc: homeBloc, lesson: lesson),
               VideoMaterialClass(lesson: lesson),
             ],
           ),
