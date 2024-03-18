@@ -198,20 +198,12 @@ showBottomSheet(
     ),
     backgroundColor: ColorManager.whiteColor,
     builder: (BuildContext context) {
-      return SizedBox(
-        height: AppSize.appSize100,
-        width: context.width,
-        child: SingleChildScrollView(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // MaterialClass(
-              //   lesson: lesson,
-              // ),
-              // HomeWorkAnswer(homeBloc: homeBloc, lesson: lesson),
-              VideoMaterialClass(lesson: lesson),
-            ],
-          ),
+      return SafeArea(
+        bottom: true,
+        child: SizedBox(
+          height: AppSize.appSize100,
+          width: context.width,
+          child: VideoMaterialClass(lesson: lesson),
         ),
       );
     },
@@ -281,8 +273,12 @@ class _UploadButton extends StatelessWidget {
               backgroundColor: ColorManager.primaryColorgreen,
             ),
             onPressed: () => context.read<HomeBloc>().add(const PickFile()),
-            child: Text(AppLocalizationsImpl.of(context)!
-                .translate(AppStrings.uploadFile)),
+            child: Text(
+              AppLocalizationsImpl.of(context)!.translate(
+                AppStrings.uploadFile,
+              ),
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       );
@@ -418,28 +414,26 @@ class VideoMaterialClass extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context)
           .pushNamed(Routes.classScreenShow, arguments: lesson),
-      child: SizedBox(
-        height: AppSize.appSize80,
-        width: context.width * AppSize.appSize0_30,
-        child: Card(
-          color: ColorManager.primaryColorgreen,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.video_collection_rounded,
-                size: AppSize.appSize20,
-                color: ColorManager.whiteColor,
-              ),
-              Text(
-                AppLocalizationsImpl.of(context)!.translate('video'),
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color: Colors.white, fontSize: FontSize.fontSize12),
-              )
-            ],
-          ),
+      child: Card(
+        color: ColorManager.primaryColorgreen,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.video_collection_rounded,
+              size: AppSize.appSize20,
+              color: ColorManager.whiteColor,
+            ),
+            Text(
+              AppLocalizationsImpl.of(context)!.translate('video'),
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(color: Colors.white, fontSize: FontSize.fontSize12),
+            )
+          ],
         ),
       ),
     );
